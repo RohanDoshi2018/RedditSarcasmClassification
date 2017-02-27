@@ -82,7 +82,12 @@ def main():
       csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
       csv_writer.writeheader()
 
-      for year in range(2007, 2017):
+      for year in [2007]:
+         for month in range(10, 13):
+            valid_user_set = load_reddit_file(year, month, valid_user_set, csv_writer)
+
+
+      for year in range(2008, 2017):
          for month in range(1, 13):
             valid_user_set = load_reddit_file(year, month, valid_user_set, csv_writer)
 
