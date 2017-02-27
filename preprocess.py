@@ -19,7 +19,7 @@ def is_english(sentence_string):
 
 # basic string cleaning
 def clean(string):
-   string = re.sub('/s', '', string) # remove /s at end
+   string = re.sub('/s$', '', string) # remove /s at end
    string = ' '.join(string.split()) # remove extra spaces within text 
    return string
 
@@ -47,7 +47,7 @@ def main():
                new_dict['num_upvotes'] = line_dict['score']
                new_dict['month_year'] = month_year
 
-               if re.search('/s$', line_dict['body']) != None:
+               if re.search('/s$', line_dict['body'].strip()) != None:
                   new_dict['sarcasm_label'] = 1
                else:
                   new_dict['sarcasm_label'] = 0
