@@ -42,8 +42,12 @@ def load_reddit_file(year, month, valid_user_set, csv_writer):
    with open(input_fname) as inputfile:
       for line in inputfile:
          line_dict = json.loads(line)
+         curr_user = line_dict['author']
+         # skip deleted users
+         if curr_user == '[deleted]':
+            continue
          if is_english(line_dict['body']):
-            curr_user = line_dict['author']
+            
             new_dict = {}
             new_dict['comment_string'] = clean(line_dict['body']) 
             new_dict['user'] = curr_user
@@ -78,7 +82,7 @@ def main():
       csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
       csv_writer.writeheader()
 
-      for year in [2010]: #range(2007, 2017):
+      for year in [2015]: #range(2007, 2017):
          for month in [1]: #range(1, 13):
             valid_user_set = load_reddit_file(year, month, valid_user_set, csv_writer)
 
