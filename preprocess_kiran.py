@@ -35,8 +35,9 @@ def load_reddit_file(year, month, valid_user_set, csv_writer):
       mstr = str(0) + str(month)
    else:
       mstr = str(month)
+   month_year = mstr + '_' + str(year)
 
-   input_fname = '/n/fs/nlpdatasets/reddit_data/RC_' + str(year) + "-" + mstr
+   input_fname = '/n/fs/nlpdatasets/reddit_data/' + str(year) + '/RC_' + str(year) + "-" + mstr
 
    with open(input_fname) as inputfile:
       for line in inputfile:
@@ -72,7 +73,7 @@ def main():
    target_fname = './filtered_reddit.csv' # always add to this
    fieldnames = ['comment_string', 'user', 'subreddit', 'num_upvotes', 'month_year','sarcasm_label']
 
-   with open(target_fname, 'bw') as csvfile:
+   with open(target_fname, 'w') as csvfile:
       
       csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
       csv_writer.writeheader()
